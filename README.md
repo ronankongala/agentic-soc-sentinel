@@ -172,7 +172,7 @@ agentic-soc-sentinel/
 
 ```bash
 # Clone repo
-git clone https://github.com/ronanlucky/agentic-soc-sentinel.git
+git clone https://github.com/ronankongala/agentic-soc-sentinel.git
 cd agentic-soc-sentinel
 
 # Install dependencies
@@ -219,14 +219,14 @@ What would you like to investigate?
 
 ## 🎓 Skills Demonstrated
 
-- **Agentic AI Architecture** — Multi-step autonomous decision making
-- **Microsoft Sentinel** — Cloud-native SIEM deployment
-- **KQL Automation** — Programmatic query generation
-- **Prompt Engineering** — Structured Claude AI interactions
-- **Azure Cloud Security** — Log Analytics, Diagnostic Settings
-- **Python Automation** — End-to-end pipeline
-- **Security Guardrails** — Responsible AI design
-- **MITRE ATT&CK** — Threat framework mapping
+- **Agentic AI Architecture** -- Multi-step autonomous decision making
+- **Microsoft Sentinel** -- Cloud-native SIEM deployment
+- **KQL Automation** -- Programmatic query generation
+- **Prompt Engineering** -- Structured Claude AI interactions
+- **Azure Cloud Security** -- Log Analytics, Diagnostic Settings
+- **Python Automation** -- End-to-end pipeline
+- **Security Guardrails** -- Responsible AI design
+- **MITRE ATT&CK** -- Threat framework mapping
 
 ---
 
@@ -246,6 +246,6 @@ What would you like to investigate?
 
 **Ronan Kongala**
 MS Cybersecurity @ Northeastern University
-- Email: ronanlucky@gmail.com
+- Email: kongalaronan@gmail.com
 - LinkedIn: [linkedin.com/in/ronan-kongala](https://linkedin.com/in/ronan-kongala)
-- GitHub: [github.com/ronanlucky](https://github.com/ronanlucky)
+- GitHub: [github.com/ronankongala](https://github.com/ronankongala)
