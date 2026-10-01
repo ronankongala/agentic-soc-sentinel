@@ -1,11 +1,11 @@
-# 🛡️ Agentic SOC Analyst
+# Agentic SOC Analyst
 ### Powered by Claude AI + Microsoft Sentinel
 
-An autonomous AI-powered Security Operations Center (SOC) analyst that detects, investigates, and responds to security threats using natural language processing and Microsoft Sentinel.
+An AI-assisted Security Operations Center (SOC) analyst that investigates Microsoft Sentinel logs from a plain-English request. Claude picks the table and fields to query, the agent runs the KQL, and Claude hunts through the results and reports threats with MITRE ATT&CK mappings and recommendations. It does not take response actions; containment is left to the analyst.
 
 ---
 
-## 🎯 Project Overview
+## Project Overview
 
 | | |
 |---|---|
@@ -16,9 +16,9 @@ An autonomous AI-powered Security Operations Center (SOC) analyst that detects, 
 
 ---
 
-## 🤖 How It Works
+## How It Works
 
-The agent operates in a fully autonomous loop:
+An analyst starts each run, and the agent handles the steps in between:
 
 1. SOC analyst describes concern in **plain English**
 2. **Claude AI** decides which Sentinel table to investigate
@@ -27,9 +27,11 @@ The agent operates in a fully autonomous loop:
 5. Claude **hunts through logs** for threats
 6. Findings returned with **MITRE ATT&CK mapping**
 
+If the KQL query returns no rows or fails, the agent falls back to 8 sample `AzureActivity` records in `src/sample_data.py` and says so in its output.
+
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ```
 User Input (Natural Language)
@@ -47,7 +49,7 @@ Structured Threat Report + MITRE ATT&CK Mapping
 
 ---
 
-## 🔧 Tech Stack
+## Tech Stack
 
 | Component | Technology | Purpose |
 |---|---|---|
@@ -60,7 +62,7 @@ Structured Threat Report + MITRE ATT&CK Mapping
 
 ---
 
-## 📸 Implementation Flow
+## Implementation Flow
 
 ### Phase 1: Azure Infrastructure Setup
 ![Azure Account](screenshots/phase1_azure_setup/phase1_step1_azure-account.png)
@@ -88,7 +90,7 @@ Structured Threat Report + MITRE ATT&CK Mapping
 *All required Python packages installed*
 
 ![Query Decision](screenshots/phase4_python_agent/phase4_step2a_agent-query-decision.png)
-*Claude AI autonomously deciding which table and fields to investigate*
+*Claude deciding which table and fields to investigate*
 
 ![Guardrails](screenshots/phase4_python_agent/phase4_step2b_guardrails-validation.png)
 *Security guardrails validating table, fields and time range*
@@ -99,9 +101,9 @@ Structured Threat Report + MITRE ATT&CK Mapping
 
 ---
 
-## 🚨 Sample Threat Hunt Results
+## Sample Threat Hunt Results
 
-The agent identified **4 threats** including:
+In the run shown in the Phase 5 screenshot, the agent identified **4 threats**:
 
 | Threat | Confidence | MITRE Tactic |
 |---|---|---|
@@ -110,27 +112,23 @@ The agent identified **4 threats** including:
 | Unauthorized Storage Key Access | High | Credential Access |
 | Firewall Rule Modification | Medium | Defense Evasion, Persistence |
 
-All findings include:
-- ✅ MITRE ATT&CK tactic + technique mapping
-- ✅ Indicators of Compromise (IOCs)
-- ✅ Confidence ratings
-- ✅ Actionable recommendations
+Each finding comes with a MITRE ATT&CK tactic and technique, indicators of compromise (IOCs), a confidence rating, and recommendations for the analyst.
 
 ---
 
-## 🛡️ Security Guardrails
+## Security Guardrails
 
 | Guardrail | Purpose |
 |---|---|
 | Table allowlist | Only approved Sentinel tables can be queried |
 | Field-level validation | Only approved fields per table |
 | Model allowlist | Only approved Claude models |
-| Time range limits | Max 7 days lookback |
+| Time range limits | Max 7-day (168-hour) lookback |
 | API key protection | Keys excluded via .gitignore |
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 agentic-soc-sentinel/
@@ -142,8 +140,7 @@ agentic-soc-sentinel/
 │   ├── phase2_sentinel_setup/
 │   ├── phase3_data_sources/
 │   ├── phase4_python_agent/
-│   ├── phase5_threat_hunting/
-│   └── phase6_remediation/
+│   └── phase5_threat_hunting/
 │
 ├── src/
 │   ├── main.py               # Entry point
@@ -160,7 +157,9 @@ agentic-soc-sentinel/
 
 ---
 
-## 🚀 Setup & Installation
+## Setup & Installation
+
+See [docs/setup-guide.md](docs/setup-guide.md) for the `keys.py` format and run notes.
 
 ### Prerequisites
 - Python 3.13+
@@ -204,33 +203,19 @@ What would you like to investigate?
 
 ---
 
-## 🆚 Comparison with Traditional SOC
+## Comparison with Manual Investigation
 
-| Aspect | Traditional SOC | This Agent |
+| Aspect | Manual workflow | This agent |
 |---|---|---|
 | Investigation trigger | Manual alert review | Natural language |
-| Table selection | Manual analyst decision | Claude AI autonomous |
+| Table selection | Manual analyst decision | Chosen by Claude |
 | Query building | Manual KQL writing | Automatically generated |
-| Log analysis speed | Hours | Seconds |
 | MITRE mapping | Manual lookup | Automatic |
 | Guardrails | Policy documents | Code-enforced |
 
 ---
 
-## 🎓 Skills Demonstrated
-
-- **Agentic AI Architecture** -- Multi-step autonomous decision making
-- **Microsoft Sentinel** -- Cloud-native SIEM deployment
-- **KQL Automation** -- Programmatic query generation
-- **Prompt Engineering** -- Structured Claude AI interactions
-- **Azure Cloud Security** -- Log Analytics, Diagnostic Settings
-- **Python Automation** -- End-to-end pipeline
-- **Security Guardrails** -- Responsible AI design
-- **MITRE ATT&CK** -- Threat framework mapping
-
----
-
-## 🔮 Future Improvements
+## Future Improvements
 
 - [ ] Connect live Sentinel data connectors
 - [ ] Add VM isolation via Azure REST API
@@ -242,7 +227,7 @@ What would you like to investigate?
 
 ---
 
-## 📧 Contact
+## Contact
 
 **Ronan Kongala**
 MS Cybersecurity @ Northeastern University
